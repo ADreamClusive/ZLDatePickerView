@@ -7,7 +7,7 @@ s.homepage = 'https://github.com/jingyiqiujing/ZLDatePickerView' //主页
 s.author = { 'ADreamClusive' => '2506513065@qq.com' } //作者
 s.source = { :git => 'https://github.com/jingyiqiujing/ZLDatePickerView.git', :tag => "1.0.0" } //git路径、指定tag号
 s.platform = :ios
-s.source_files  = "./**/*.{h,m}" //库的源代码文件
+s.source_files  = "classes", "classes/**/*.{h,m}" //库的源代码文件
 s.framework = 'UIKit' //依赖的framework
 s.requires_arc = true
 end
