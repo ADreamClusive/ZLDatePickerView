@@ -5,6 +5,7 @@
 //
 
 #import "ZLDatePickerView.h"
+#import "NSBundle+Addition.h"
 
 static NSString *const kCalendarUnit = @"calendarunit";
 static NSString *const kNumberOfRowsInCurrentComponent = @"kNumberOfRowsInCurrentComponent";
@@ -117,13 +118,13 @@ static NSString *const kBlockSelectRowInComponent = @"kBlockSelectRowInComponent
     
     UIButton *saveBtn = [[UIButton alloc] init];
     saveBtn.frame = CGRectMake(self.bgView.width - 50, 2, 40, 40);
-    [saveBtn setImage:[UIImage imageNamed:@"icon_select"] forState:UIControlStateNormal];
+    [saveBtn setImage:[NSBundle imageWithName:@"icon_select"] forState:UIControlStateNormal];
     [saveBtn addTarget:self action:@selector(saveBtnClick) forControlEvents:UIControlEventTouchUpInside];
     [self.toolView addSubview:saveBtn];
     
     UIButton *cancelBtn = [[UIButton alloc] init];
     cancelBtn.frame = CGRectMake(10, 2, 40, 40);
-    [cancelBtn setImage:[UIImage imageNamed:@"icon_revocation"] forState:UIControlStateNormal];
+    [cancelBtn setImage:[NSBundle imageWithName:@"icon_revocation"] forState:UIControlStateNormal];
     [cancelBtn addTarget:self action:@selector(cancelBtnClick) forControlEvents:UIControlEventTouchUpInside];
     [self.toolView addSubview:cancelBtn];
     

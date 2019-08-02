@@ -16,10 +16,8 @@
 		5A930C1422F49B860040A84F /* UIView+Frame.m in Sources */ = {isa = PBXBuildFile; fileRef = 5A930C0F22F49B860040A84F /* UIView+Frame.m */; };
 		5A930C1522F49B860040A84F /* UIColor+Addition.m in Sources */ = {isa = PBXBuildFile; fileRef = 5A930C1122F49B860040A84F /* UIColor+Addition.m */; };
 		5A930C1622F49B860040A84F /* ZLDatePickerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 5A930C1322F49B860040A84F /* ZLDatePickerView.m */; };
-		5A930C2422F49DDC0040A84F /* icon_revocation@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 5A930C2022F49DDC0040A84F /* icon_revocation@3x.png */; };
-		5A930C2522F49DDC0040A84F /* icon_revocation@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 5A930C2122F49DDC0040A84F /* icon_revocation@2x.png */; };
-		5A930C2622F49DDC0040A84F /* icon_select@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 5A930C2222F49DDC0040A84F /* icon_select@2x.png */; };
-		5A930C2722F49DDC0040A84F /* icon_select@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 5A930C2322F49DDC0040A84F /* icon_select@3x.png */; };
+		5A930C3222F4A67C0040A84F /* NSBundle+Addition.m in Sources */ = {isa = PBXBuildFile; fileRef = 5A930C3122F4A67C0040A84F /* NSBundle+Addition.m */; };
+		5A930C3A22F4AB880040A84F /* ZLDatePicker.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 5A930C3922F4AB880040A84F /* ZLDatePicker.bundle */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -39,10 +37,9 @@
 		5A930C1122F49B860040A84F /* UIColor+Addition.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIColor+Addition.m"; sourceTree = "<group>"; };
 		5A930C1222F49B860040A84F /* UIView+Frame.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+Frame.h"; sourceTree = "<group>"; };
 		5A930C1322F49B860040A84F /* ZLDatePickerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZLDatePickerView.m; sourceTree = "<group>"; };
-		5A930C2022F49DDC0040A84F /* icon_revocation@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon_revocation@3x.png"; sourceTree = "<group>"; };
-		5A930C2122F49DDC0040A84F /* icon_revocation@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon_revocation@2x.png"; sourceTree = "<group>"; };
-		5A930C2222F49DDC0040A84F /* icon_select@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon_select@2x.png"; sourceTree = "<group>"; };
-		5A930C2322F49DDC0040A84F /* icon_select@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon_select@3x.png"; sourceTree = "<group>"; };
+		5A930C3022F4A67C0040A84F /* NSBundle+Addition.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "NSBundle+Addition.h"; sourceTree = "<group>"; };
+		5A930C3122F4A67C0040A84F /* NSBundle+Addition.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "NSBundle+Addition.m"; sourceTree = "<group>"; };
+		5A930C3922F4AB880040A84F /* ZLDatePicker.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = ZLDatePicker.bundle; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -92,25 +89,24 @@
 		5A930C0D22F49B860040A84F /* classes */ = {
 			isa = PBXGroup;
 			children = (
-				5A930C1F22F49DDC0040A84F /* images */,
+				5A930C3822F4AB880040A84F /* images */,
 				5A930C0E22F49B860040A84F /* UIColor+Addition.h */,
 				5A930C0F22F49B860040A84F /* UIView+Frame.m */,
 				5A930C1022F49B860040A84F /* ZLDatePickerView.h */,
 				5A930C1122F49B860040A84F /* UIColor+Addition.m */,
 				5A930C1222F49B860040A84F /* UIView+Frame.h */,
 				5A930C1322F49B860040A84F /* ZLDatePickerView.m */,
+				5A930C3022F4A67C0040A84F /* NSBundle+Addition.h */,
+				5A930C3122F4A67C0040A84F /* NSBundle+Addition.m */,
 			);
 			name = classes;
 			path = ../classes;
 			sourceTree = "<group>";
 		};
-		5A930C1F22F49DDC0040A84F /* images */ = {
+		5A930C3822F4AB880040A84F /* images */ = {
 			isa = PBXGroup;
 			children = (
-				5A930C2022F49DDC0040A84F /* icon_revocation@3x.png */,
-				5A930C2122F49DDC0040A84F /* icon_revocation@2x.png */,
-				5A930C2222F49DDC0040A84F /* icon_select@2x.png */,
-				5A930C2322F49DDC0040A84F /* icon_select@3x.png */,
+				5A930C3922F4AB880040A84F /* ZLDatePicker.bundle */,
 			);
 			path = images;
 			sourceTree = "<group>";
@@ -173,12 +169,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				5A930C0222F49AE50040A84F /* LaunchScreen.storyboard in Resources */,
-				5A930C2622F49DDC0040A84F /* icon_select@2x.png in Resources */,
+				5A930C3A22F4AB880040A84F /* ZLDatePicker.bundle in Resources */,
 				5A930BFF22F49AE50040A84F /* Assets.xcassets in Resources */,
-				5A930C2722F49DDC0040A84F /* icon_select@3x.png in Resources */,
-				5A930C2422F49DDC0040A84F /* icon_revocation@3x.png in Resources */,
 				5A930BFD22F49AE20040A84F /* Main.storyboard in Resources */,
-				5A930C2522F49DDC0040A84F /* icon_revocation@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -191,6 +184,7 @@
 			files = (
 				5A930C1622F49B860040A84F /* ZLDatePickerView.m in Sources */,
 				5A930C1422F49B860040A84F /* UIView+Frame.m in Sources */,
+				5A930C3222F4A67C0040A84F /* NSBundle+Addition.m in Sources */,
 				5A930BFA22F49AE20040A84F /* ViewController.m in Sources */,
 				5A930C0522F49AE50040A84F /* main.m in Sources */,
 				5A930BF722F49AE20040A84F /* AppDelegate.m in Sources */,
