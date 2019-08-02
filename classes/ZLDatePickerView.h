@@ -24,7 +24,6 @@ typedef NS_ENUM(NSInteger, CustomDatePickerMode) {
 
 @interface ZLDatePickerView : UIView
 
-
 /// 标题
 @property (copy, nonatomic) NSString *title;
 /** 工具栏背景色 */
@@ -45,6 +44,9 @@ typedef NS_ENUM(NSInteger, CustomDatePickerMode) {
 
 @property (copy, nonatomic)  void(^dismissBlock)(void);
 @property (copy, nonatomic)  void(^doneBlock)(NSDate *date);
+
+/// 是否显示长期按钮(针对长期有效期的情况)
+@property (assign, nonatomic) BOOL isNeedForeverBtn;
 
 - (void)setTitle:(NSString *)title datePickerMode:(CustomDatePickerMode)mode defDate:(NSDate *)defDate doneBlock:(void (^)(NSDate *date))done dismissBlock:(void(^)(void))dismiss;
 - (void)showInView:(UIView *)view;

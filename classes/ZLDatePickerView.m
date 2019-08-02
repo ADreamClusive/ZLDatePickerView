@@ -7,7 +7,7 @@
 #import "ZLDatePickerView.h"
 
 static NSString *const kCalendarUnit = @"calendarunit";
-static NSString *const kNumberOfComponent = @"kNumberOfComponent";
+static NSString *const kNumberOfRowsInCurrentComponent = @"kNumberOfRowsInCurrentComponent";
 static NSString *const kWidthRatioOfComponent = @"kWidthRatioOfComponent";
 static NSString *const kBlockGetTitleOfRowInComponent = @"kBlockGetTitleOfRowInComponent";
 static NSString *const kBlockSelectRowInComponent = @"kBlockSelectRowInComponent";
@@ -16,6 +16,7 @@ static NSString *const kBlockSelectRowInComponent = @"kBlockSelectRowInComponent
 @property (strong, nonatomic) UIPickerView *pickerView; // 选择器
 @property (strong, nonatomic) UIView *toolView; // 工具条
 @property (strong, nonatomic) UILabel *titleLbl; // 标题
+@property (strong, nonatomic) UIButton *foreverBtn; // 长期按钮
 
 // 数显最小时间 最大时间
 @property (nonatomic, strong) NSDate *beginDate;
@@ -71,20 +72,32 @@ static NSString *const kBlockSelectRowInComponent = @"kBlockSelectRowInComponent
     
     [self configToolView];
     
+    CGFloat pickerY = self.toolView.bottom;
+    if (self.isNeedForeverBtn) {
+        pickerY += 30;
+    }
+    self.foreverBtn.hidden = !self.isNeedForeverBtn;
+    
     CGFloat x = 5.0;
-    self.pickerView.frame = CGRectMake(x, CGRectGetMaxY(self.toolView.frame), self.bgView.width - x * 2, mPickerHeight - CGRectGetMaxY(self.toolView.frame));
+    self.pickerView.frame = CGRectMake(x, pickerY, self.bgView.width - x * 2, mPickerHeight - CGRectGetMaxY(self.toolView.frame));
+    
+    self.foreverBtn.frame = CGRectMake(0, self.toolView.bottom + 12.5, 100, 30);
+    self.foreverBtn.centerX = self.toolView.centerX;
 }
 
 #pragma mark - 配置初始化数据
 - (void)configData
 {    
-    self.minuteInterval = 5;
+    self.minuteInterval = 1;
     self.date = [NSDate date];
     self.multiples = 200;
     self.beginDate = [NSDate dateWithTimeIntervalSince1970:0];
     self.endDate = [self stringDate:@"10000-01-01" andFormat:@"yyyy-MM-dd"];
+    self.minimumDate = self.beginDate;
+    self.maximumDate = self.endDate;
     self.font = [UIFont fontWithName:@"PingFangSC-Regular" size:22];
     self.toolBgColor = COLOR_EEEEEE;
+    self.isNeedForeverBtn = NO;
 }
 
 #pragma mark - 配置界面
@@ -93,6 +106,7 @@ static NSString *const kBlockSelectRowInComponent = @"kBlockSelectRowInComponent
     [self addSubview:self.bgView];
     [self.toolView addSubview:self.titleLbl];
     [self.bgView addSubview:self.toolView];
+    [self.bgView addSubview:self.foreverBtn];
     [self.bgView addSubview:self.pickerView];
 }
 /// 配置工具条
@@ -116,19 +130,15 @@ static NSString *const kBlockSelectRowInComponent = @"kBlockSelectRowInComponent
     self.titleLbl.frame = CGRectMake(60, 2, self.bgView.width - 120, 40);
 }
 
-- (void)setTitle:(NSString *)title {
-    _title = title;
-    self.titleLbl.text = title;
-}
-
 - (void)setTitle:(NSString *)title datePickerMode:(CustomDatePickerMode)mode defDate:(NSDate *)defDate doneBlock:(void (^)(NSDate *date))done dismissBlock:(void(^)(void))dismiss
 {
     self.title = title;
     self.mode = mode;
-    self.date = defDate;
+    self.date = defDate ? : [NSDate date];
     self.doneBlock = done;
     self.dismissBlock = dismiss;
 }
+
 - (void)showInView:(UIView *)view
 {
     [self prepareToShow];
@@ -267,7 +277,7 @@ static NSString *const kBlockSelectRowInComponent = @"kBlockSelectRowInComponent
     
     NSDictionary *dict = @{kCalendarUnit:@(NSCalendarUnitYear),
                            kWidthRatioOfComponent:@([self ratioForComWidth:@"00年"]),
-                           kNumberOfComponent:@(numNian),
+                           kNumberOfRowsInCurrentComponent:@(numNian),
                            kBlockGetTitleOfRowInComponent:(NSString *)^(NSInteger component, NSInteger row){
                                
                                return [NSString stringWithFormat:@"%ld年", [self convertDateToYear:self.beginDate]+row];
@@ -288,7 +298,7 @@ static NSString *const kBlockSelectRowInComponent = @"kBlockSelectRowInComponent
 {
     NSDictionary *dict = @{kCalendarUnit:@(NSCalendarUnitMonth),
                            kWidthRatioOfComponent:@([self ratioForComWidth:@"00月"]),
-                           kNumberOfComponent:@(12*self.multiples),
+                           kNumberOfRowsInCurrentComponent:@(12*self.multiples),
                            kBlockGetTitleOfRowInComponent:(NSString *)^(NSInteger component, NSInteger row){
                                
                                return [NSString stringWithFormat:@"%02ld月", row%12+1];
@@ -310,7 +320,7 @@ static NSString *const kBlockSelectRowInComponent = @"kBlockSelectRowInComponent
 {
     NSDictionary *dict = @{kCalendarUnit:@(unit),
                            kWidthRatioOfComponent:@([self ratioForComWidth:(unit == NSCalendarUnitDay) ? @"00日" : @"00日 周五"]),
-                           kNumberOfComponent:@([self daysOfYear:self.year.integerValue month:self.month.integerValue]*self.multiples),
+                           kNumberOfRowsInCurrentComponent:@([self daysOfYear:self.year.integerValue month:self.month.integerValue]*self.multiples),
                            kBlockGetTitleOfRowInComponent:(NSString *)^(NSInteger component, NSInteger row){
         
                                 if (unit == (NSCalendarUnitDay | NSCalendarUnitWeekday) ) {
@@ -335,7 +345,7 @@ static NSString *const kBlockSelectRowInComponent = @"kBlockSelectRowInComponent
 {
     NSDictionary *dict = @{kCalendarUnit:@(NSCalendarUnitHour),
                            kWidthRatioOfComponent:@([self ratioForComWidth:@"00"]),
-                           kNumberOfComponent:@(24*self.multiples),
+                           kNumberOfRowsInCurrentComponent:@(24*self.multiples),
                            kBlockGetTitleOfRowInComponent:(NSString *)^(NSInteger component, NSInteger row){
                                
                                return [NSString stringWithFormat:@"%02ld", row%(24)];
@@ -352,10 +362,10 @@ static NSString *const kBlockSelectRowInComponent = @"kBlockSelectRowInComponent
 {
     NSDictionary *dict = @{kCalendarUnit:@(NSCalendarUnitMinute),
                            kWidthRatioOfComponent:@([self ratioForComWidth:@"00"]),
-                           kNumberOfComponent:@(60/self.minuteInterval*self.multiples),
+                           kNumberOfRowsInCurrentComponent:@([self countOfOneHour]*self.multiples),
                            kBlockGetTitleOfRowInComponent:(NSString *)^(NSInteger component, NSInteger row){
                         
-                               return [NSString stringWithFormat:@"%02ld", row%(60/self.minuteInterval)*self.minuteInterval];
+                               return [NSString stringWithFormat:@"%02ld", row % [self countOfOneHour] * self.minuteInterval];
                            },
                            kBlockSelectRowInComponent:^(NSInteger component, NSInteger row){
         
@@ -486,7 +496,7 @@ static NSString *const kBlockSelectRowInComponent = @"kBlockSelectRowInComponent
 }
 - (NSInteger)pickerView:(UIPickerView *)pickerView numberOfRowsInComponent:(NSInteger)component
 {
-    return [[self.dataArray[component] valueForKey:kNumberOfComponent] integerValue];
+    return [[self.dataArray[component] valueForKey:kNumberOfRowsInCurrentComponent] integerValue];
 }
 - (CGFloat)pickerView:(UIPickerView *)pickerView widthForComponent:(NSInteger)component
 {
@@ -545,7 +555,25 @@ static NSString *const kBlockSelectRowInComponent = @"kBlockSelectRowInComponent
     [self dismiss];
 }
 
+- (void)foreverBtnClick
+{
+    self.date = self.endDate;
+    
+    self.year = [NSString stringWithFormat:@"%ld年", [self convertDateToYear:self.date]];
+    self.month = [NSString stringWithFormat:@"%02ld月", [self convertDateToMonth:self.date]];
+    self.day = [NSString stringWithFormat:@"%02ld日", [self convertDateToDay:self.date]];
+    self.hour = [NSString stringWithFormat:@"%02ld", [self convertDateToHour:self.date]];
+    self.minute = [NSString stringWithFormat:@"%02ld", [self convertDateToMinute:self.date]];
+    
+    [self saveBtnClick];
+}
+
 #pragma mark - private
+// 一个小时显示多少个刻度
+- (NSInteger)countOfOneHour
+{
+    return (59 / self.minuteInterval + 1);
+}
 - (void)scrollToCorrectDay
 {
     NSInteger monthDays = [self daysOfYear:self.year.integerValue month:self.month.integerValue];
@@ -692,8 +720,44 @@ static NSString *const kBlockSelectRowInComponent = @"kBlockSelectRowInComponent
     return date;
 }
 
-#pragma mark - getters
+#pragma mark - setters
+- (void)setTitle:(NSString *)title
+{
+    _title = title;
+    self.titleLbl.text = title;
+}
 
+- (void)setDate:(NSDate *)date
+{
+    if (date == nil ) {
+        return;
+    }
+    _date = date;
+}
+- (void)setMinimumDate:(NSDate *)minimumDate
+{
+    if (minimumDate == nil ) {
+        return;
+    }
+    _minimumDate = minimumDate;
+}
+- (void)setMaximumDate:(NSDate *)maximumDate
+{
+    if (maximumDate == nil ) {
+        return;
+    }
+    _maximumDate = maximumDate;
+}
+
+- (void)setMinuteInterval:(NSInteger)minuteInterval
+{
+    if (minuteInterval < 1 ) {
+        return;
+    }
+    _minuteInterval = minuteInterval;
+}
+
+#pragma mark - getters
 - (NSMutableArray *)dataArray
 {
     if (!_dataArray) {
@@ -724,6 +788,17 @@ static NSString *const kBlockSelectRowInComponent = @"kBlockSelectRowInComponent
         _toolView = [[UIView alloc] init];
     }
     return _toolView;
+}
+
+- (UIButton *)foreverBtn
+{
+    if (!_foreverBtn) {
+        _foreverBtn = [[UIButton alloc] init];
+        [_foreverBtn addTarget:self action:@selector(foreverBtnClick) forControlEvents:UIControlEventTouchUpInside];
+        [_foreverBtn setTitle:@"长期" forState:UIControlStateNormal];
+        [_foreverBtn setTitleColor:UIColor.blackColor forState:UIControlStateNormal];
+    }
+    return _foreverBtn;
 }
 
 - (UILabel *)titleLbl

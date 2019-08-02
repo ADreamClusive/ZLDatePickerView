@@ -1,6 +1,5 @@
 //
 //  UIColor+WSK.h
-//  SLTCarrier
 //
 //  Created by oyahaok on 2018/10/17.
 //  Copyright © 2018年 oyahaok. All rights reserved.
@@ -13,11 +12,14 @@
 // 随机颜色
 + (UIColor *)randomColor;
 
+
 + (UIColor *)red:(int)red green:(int)green blue:(int)blue alpha:(CGFloat)alpha;
+
 
 + (NSArray *)convertColorToRBG:(UIColor *)color;
 
 + (UIColor *)convertHexColorToUIColor:(NSInteger)hexColor;
+
 
 + (UIColor *)colorWithHexString:(NSString *)hexString;
 

@@ -1,6 +1,5 @@
 //
 //  UIView+Frame.m
-//  SLTCarrier
 //
 //  Created by oyahaok on 2018/10/17.
 //  Copyright © 2018年 oyahaok. All rights reserved.
