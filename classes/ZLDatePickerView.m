@@ -6,6 +6,7 @@
 
 #import "ZLDatePickerView.h"
 #import "NSBundle+Addition.h"
+#import "UIView+Frame.h"
 
 static NSString *const kCalendarUnit = @"calendarunit";
 static NSString *const kNumberOfRowsInCurrentComponent = @"kNumberOfRowsInCurrentComponent";
@@ -48,8 +49,8 @@ static NSString *const kBlockSelectRowInComponent = @"kBlockSelectRowInComponent
 @end
 
 #define mPickerHeight (300.0)
-#define THColorRGB(rgb)  [UIColor colorWithRed:(rgb)/255.0 green:(rgb)/255.0 blue:(rgb)/255.0 alpha:1.0]
-#define COLOR_EEEEEE [UIColor colorWithHexString:@"#EEEEEE"]
+#define COLOR_RGBA(r, g, b, a) [UIColor colorWithRed:(r) / 255.f green:(g) / 255.f blue:(b) / 255.f alpha:(a)]
+#define COLOR_RGB(r, g, b) COLOR_RGBA(r, g, b, 1.0)
 
 @implementation ZLDatePickerView
 
@@ -57,7 +58,7 @@ static NSString *const kBlockSelectRowInComponent = @"kBlockSelectRowInComponent
 /// 初始化
 - (instancetype)initWithFrame:(CGRect)frame
 {
-    self = [super initWithFrame:mScreenBounds];
+    self = [super initWithFrame:[self screenBounds]];
     if (self) {
         self.backgroundColor = [UIColor clearColor];
         
@@ -69,7 +70,7 @@ static NSString *const kBlockSelectRowInComponent = @"kBlockSelectRowInComponent
 
 - (void)layoutSubviews
 {
-    self.bgView.frame = CGRectMake(0, mScreenHeight - mPickerHeight, self.width, mPickerHeight);
+    self.bgView.frame = CGRectMake(0, [self screenHeight] - mPickerHeight, self.width, mPickerHeight);
     
     [self configToolView];
     
@@ -80,7 +81,7 @@ static NSString *const kBlockSelectRowInComponent = @"kBlockSelectRowInComponent
     self.foreverBtn.hidden = !self.isNeedForeverBtn;
     
     CGFloat x = 5.0;
-    self.pickerView.frame = CGRectMake(x, pickerY, self.bgView.width - x * 2, mPickerHeight - CGRectGetMaxY(self.toolView.frame));
+    self.pickerView.frame = CGRectMake(x, pickerY, self.bgView.width - x * 2, mPickerHeight - self.toolView.bottom);
     
     self.foreverBtn.frame = CGRectMake(0, self.toolView.bottom + 12.5, 100, 30);
     self.foreverBtn.centerX = self.toolView.centerX;
@@ -97,7 +98,7 @@ static NSString *const kBlockSelectRowInComponent = @"kBlockSelectRowInComponent
     self.minimumDate = self.beginDate;
     self.maximumDate = self.endDate;
     self.font = [UIFont fontWithName:@"PingFangSC-Regular" size:22];
-    self.toolBgColor = COLOR_EEEEEE;
+    self.toolBgColor = COLOR_RGB(238, 238, 238);
     self.isNeedForeverBtn = NO;
 }
 
@@ -147,7 +148,7 @@ static NSString *const kBlockSelectRowInComponent = @"kBlockSelectRowInComponent
     self.bgView.top = self.height;
     [UIView animateWithDuration:0.2
                      animations:^{
-                         self.backgroundColor = [UIColor colorWithHexString:@"#AAAAAA" alpha:0.46];
+                         self.backgroundColor = COLOR_RGBA(170, 170, 170, 0.46);
                          self.bgView.top = self.height - self.bgView.height;
                      }];
 
@@ -807,7 +808,7 @@ static NSString *const kBlockSelectRowInComponent = @"kBlockSelectRowInComponent
     if (!_titleLbl) {
         _titleLbl = [[UILabel alloc] init];
         _titleLbl.textAlignment = NSTextAlignmentCenter;
-        _titleLbl.textColor = THColorRGB(34);
+        _titleLbl.textColor = COLOR_RGB(34, 34, 34);
     }
     return _titleLbl;
 }
@@ -821,6 +822,23 @@ static NSString *const kBlockSelectRowInComponent = @"kBlockSelectRowInComponent
         _pickerView.showsSelectionIndicator = YES;
     }
     return _pickerView;
+}
+
+#pragma mark - frame
+
+- (CGRect)screenBounds
+{
+    return UIScreen.mainScreen.bounds;
+}
+
+- (CGFloat)screenWidth
+{
+    return UIScreen.mainScreen.bounds.size.width;
+}
+
+- (CGFloat)screenHeight
+{
+    return UIScreen.mainScreen.bounds.size.height;
 }
 
 @end

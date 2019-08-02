@@ -10,6 +10,8 @@
 #import "ZLDatePickerView.h"
 @interface ViewController ()
 
+#define mKeyWindow  [[[UIApplication sharedApplication] delegate] window]
+
 @property (weak, nonatomic) IBOutlet UILabel *timeLabel;
 
 @end
@@ -19,7 +21,6 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-
 }
 
 - (IBAction)action:(id)sender

@@ -14,7 +14,6 @@
 		5A930C0222F49AE50040A84F /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5A930C0022F49AE50040A84F /* LaunchScreen.storyboard */; };
 		5A930C0522F49AE50040A84F /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 5A930C0422F49AE50040A84F /* main.m */; };
 		5A930C1422F49B860040A84F /* UIView+Frame.m in Sources */ = {isa = PBXBuildFile; fileRef = 5A930C0F22F49B860040A84F /* UIView+Frame.m */; };
-		5A930C1522F49B860040A84F /* UIColor+Addition.m in Sources */ = {isa = PBXBuildFile; fileRef = 5A930C1122F49B860040A84F /* UIColor+Addition.m */; };
 		5A930C1622F49B860040A84F /* ZLDatePickerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 5A930C1322F49B860040A84F /* ZLDatePickerView.m */; };
 		5A930C3222F4A67C0040A84F /* NSBundle+Addition.m in Sources */ = {isa = PBXBuildFile; fileRef = 5A930C3122F4A67C0040A84F /* NSBundle+Addition.m */; };
 		5A930C3A22F4AB880040A84F /* ZLDatePicker.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 5A930C3922F4AB880040A84F /* ZLDatePicker.bundle */; };
@@ -31,10 +30,8 @@
 		5A930C0122F49AE50040A84F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		5A930C0322F49AE50040A84F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		5A930C0422F49AE50040A84F /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
-		5A930C0E22F49B860040A84F /* UIColor+Addition.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIColor+Addition.h"; sourceTree = "<group>"; };
 		5A930C0F22F49B860040A84F /* UIView+Frame.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+Frame.m"; sourceTree = "<group>"; };
 		5A930C1022F49B860040A84F /* ZLDatePickerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZLDatePickerView.h; sourceTree = "<group>"; };
-		5A930C1122F49B860040A84F /* UIColor+Addition.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIColor+Addition.m"; sourceTree = "<group>"; };
 		5A930C1222F49B860040A84F /* UIView+Frame.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+Frame.h"; sourceTree = "<group>"; };
 		5A930C1322F49B860040A84F /* ZLDatePickerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZLDatePickerView.m; sourceTree = "<group>"; };
 		5A930C3022F4A67C0040A84F /* NSBundle+Addition.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "NSBundle+Addition.h"; sourceTree = "<group>"; };
@@ -90,11 +87,9 @@
 			isa = PBXGroup;
 			children = (
 				5A930C3822F4AB880040A84F /* images */,
-				5A930C0E22F49B860040A84F /* UIColor+Addition.h */,
+				5A930C1222F49B860040A84F /* UIView+Frame.h */,
 				5A930C0F22F49B860040A84F /* UIView+Frame.m */,
 				5A930C1022F49B860040A84F /* ZLDatePickerView.h */,
-				5A930C1122F49B860040A84F /* UIColor+Addition.m */,
-				5A930C1222F49B860040A84F /* UIView+Frame.h */,
 				5A930C1322F49B860040A84F /* ZLDatePickerView.m */,
 				5A930C3022F4A67C0040A84F /* NSBundle+Addition.h */,
 				5A930C3122F4A67C0040A84F /* NSBundle+Addition.m */,
@@ -188,7 +183,6 @@
 				5A930BFA22F49AE20040A84F /* ViewController.m in Sources */,
 				5A930C0522F49AE50040A84F /* main.m in Sources */,
 				5A930BF722F49AE20040A84F /* AppDelegate.m in Sources */,
-				5A930C1522F49B860040A84F /* UIColor+Addition.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

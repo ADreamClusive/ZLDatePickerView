@@ -5,15 +5,8 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "UIColor+Addition.h"
-#import "UIView+Frame.h"
 
 NS_ASSUME_NONNULL_BEGIN
-
-#define mKeyWindow  [[[UIApplication sharedApplication] delegate] window]
-#define mScreenBounds         ([UIScreen mainScreen].bounds)
-#define mScreenWidth          ([UIScreen mainScreen].bounds.size.width)
-#define mScreenHeight         ([UIScreen mainScreen].bounds.size.height)
 
 typedef NS_ENUM(NSInteger, CustomDatePickerMode) {
     CustomDatePickerModeDefault = 0,

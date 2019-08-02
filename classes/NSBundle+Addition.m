@@ -22,7 +22,8 @@
 
 + (UIImage *)imageWithName:(NSString *)imageName
 {
-    UIImage *image = [[UIImage imageWithContentsOfFile:[[self ZLDatePickerBundle] pathForResource:[NSString stringWithFormat:@"imageName@%zdx", (NSInteger)UIScreen.mainScreen.scale] ofType:@"png"]] imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
+    NSString *imgN = [NSString stringWithFormat:@"%@@%zdx",imageName, (NSInteger)UIScreen.mainScreen.scale];
+    UIImage *image = [UIImage imageWithContentsOfFile:[[self ZLDatePickerBundle] pathForResource:imgN ofType:@"png"]];
     return image;
 }
 
