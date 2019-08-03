@@ -10,8 +10,6 @@
 #import "ZLDatePickerView.h"
 @interface ViewController ()
 
-#define mKeyWindow  [[[UIApplication sharedApplication] delegate] window]
-
 @property (weak, nonatomic) IBOutlet UILabel *timeLabel;
 
 @end
@@ -32,12 +30,12 @@
     customdateView.maximumDate = [NSDate dateWithTimeIntervalSinceNow:3600*24*1024];
     NSDate *defDate = self.timeLabel.text.length ? [self stringDate:self.timeLabel.text andFormat:@"yyyy-MM-dd HH:mm:ss"] : [NSDate date];
     customdateView.isNeedForeverBtn = YES;
-    [customdateView setTitle:@"请选择时间" datePickerMode:CustomDatePickerModeNianyuerishifen defDate:defDate doneBlock:^(NSDate * _Nonnull date) {
+    [customdateView setTitle:@"请选择时间" datePickerMode:ZLDatePickerModeNianyuerishifen defDate:defDate doneBlock:^(NSDate * _Nonnull date) {
         self.timeLabel.text = [self dateStr:date andFormat:@"yyyy-MM-dd HH:mm:ss"];
     } dismissBlock:^{
         
     }];
-    [customdateView showInView:mKeyWindow];
+    [customdateView showInView:[[[UIApplication sharedApplication] delegate] window]];
 }
 
 - (NSDate *)stringDate:(NSString *)dateStr andFormat:(NSString *)format

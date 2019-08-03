@@ -132,7 +132,7 @@ static NSString *const kBlockSelectRowInComponent = @"kBlockSelectRowInComponent
     self.titleLbl.frame = CGRectMake(60, 2, self.bgView.width - 120, 40);
 }
 
-- (void)setTitle:(NSString *)title datePickerMode:(CustomDatePickerMode)mode defDate:(NSDate *)defDate doneBlock:(void (^)(NSDate *date))done dismissBlock:(void(^)(void))dismiss
+- (void)setTitle:(NSString *)title datePickerMode:(ZLDatePickerMode)mode defDate:(NSDate *)defDate doneBlock:(void (^)(NSDate *date))done dismissBlock:(void(^)(void))dismiss
 {
     self.title = title;
     self.mode = mode;
@@ -202,7 +202,7 @@ static NSString *const kBlockSelectRowInComponent = @"kBlockSelectRowInComponent
     self.minute = [NSString stringWithFormat:@"%02ld", [self convertDateToMinute:self.date]];
     
     switch (self.mode) {
-        case CustomDatePickerModeNianyuerishifen:
+        case ZLDatePickerModeNianyuerishifen:
         {
             self.maxWidthStr = @"0000年00月00日0000";
             [self.dataArray addObject:[self yearConfig]];
@@ -212,7 +212,7 @@ static NSString *const kBlockSelectRowInComponent = @"kBlockSelectRowInComponent
             [self.dataArray addObject:[self minuteConfit]];
         }
             break;
-        case CustomDatePickerModeNianyuerizhoushifen:
+        case ZLDatePickerModeNianyuerizhoushifen:
         {
             self.maxWidthStr = @"0000年00月00日 周五0000";
             [self.dataArray addObject:[self yearConfig]];
@@ -222,7 +222,7 @@ static NSString *const kBlockSelectRowInComponent = @"kBlockSelectRowInComponent
             [self.dataArray addObject:[self minuteConfit]];
         }
             break;
-        case CustomDatePickerModeYuerinianshifen:
+        case ZLDatePickerModeYuerinianshifen:
             self.maxWidthStr = @"0000年00月00日0000";
             [self.dataArray addObject:[self monthConfig]];
             [self.dataArray addObject:[self dayConfig:(NSCalendarUnitDay)]];
