@@ -18,17 +18,15 @@ pod 'ZLDatePickerView'
 ```oc
 ZLDatePickerView *customdateView = [[ZLDatePickerView alloc] init];
 
-customdateView.minuteInterval = 10;
-customdateView.minimumDate = [NSDate dateWithTimeIntervalSinceNow:-3600*24*1024];
-customdateView.maximumDate = [NSDate dateWithTimeIntervalSinceNow:3600*24*1024];
 NSDate *defDate = self.timeLabel.text.length ? [self stringDate:self.timeLabel.text andFormat:@"yyyy-MM-dd HH:mm:ss"] : [NSDate date];
-customdateView.isNeedForeverBtn = YES;
-// 通过ZLDatePickerMode指定显示的样式
+
 [customdateView setTitle:@"请选择时间" datePickerMode:ZLDatePickerModeNianyuerishifen defDate:defDate doneBlock:^(NSDate * _Nonnull date) {
-    self.timeLabel.text = [self dateStr:date andFormat:@"yyyy-MM-dd HH:mm:ss"];
+
+self.timeLabel.text = [self dateStr:date andFormat:@"yyyy-MM-dd HH:mm:ss"];
 } dismissBlock:^{
-    
+
 }];
+
 [customdateView showInView:[[[UIApplication sharedApplication] delegate] window]];
 ```
 
